@@ -49,7 +49,7 @@ public class PlanController {
         }
     }
 
-    // Create plan (Admin) - REMOVED @Valid
+    // Create plan (Admin) 
     @PostMapping("/admin")
     public ResponseEntity<Map<String, Object>> createPlan(@RequestBody Plan plan) {
         Map<String, Object> response = new HashMap<>();
@@ -68,7 +68,7 @@ public class PlanController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    // Update plan (Admin) - REMOVED @Valid
+    // Update plan (Admin) 
     @PutMapping("/admin/{id}")
     public ResponseEntity<Map<String, Object>> updatePlan(@PathVariable Long id, @RequestBody Plan planDetails) {
         Map<String, Object> response = new HashMap<>();
@@ -93,20 +93,5 @@ public class PlanController {
         return ResponseEntity.ok(response);
     }
 
-    // Get admin stats
-    @GetMapping("/admin/stats")
-    public ResponseEntity<Map<String, Object>> getStats() {
-        long totalPlans = planRepository.count();
-        long activePlans = planRepository.findByActiveTrue().size();
-
-        Map<String, Object> stats = new HashMap<>();
-        stats.put("totalPlans", totalPlans);
-        stats.put("activePlans", activePlans);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("success", true);
-        response.put("message", "Stats retrieved successfully");
-        response.put("data", stats);
-        return ResponseEntity.ok(response);
-    }
+ 
 }
